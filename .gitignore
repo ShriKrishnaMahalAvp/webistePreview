@@ -1,0 +1,6 @@
+# Configuration file with real secrets - never commit to Git
+config.js
+
+# Optional: ignore common sensitive files
+.env
+.env.local
