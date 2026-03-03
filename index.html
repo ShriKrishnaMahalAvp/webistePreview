@@ -237,7 +237,7 @@
                 </div>
 
                 <h3 class="relative z-10 text-amber-500/90 font-bold tracking-[0.2em] uppercase text-xs mb-1">Coming Soon</h3>
-                <p class="relative z-10 text-stone-500 text-sm font-light tracking-wide">More features unlocking soon...</p>
+                <p class="relative z-10 text-stone-500 text-sm font-light tracking-wide">More things unlocking soon...</p>
             </div>
         </div>
     </section>
@@ -328,10 +328,17 @@
             const galleryContainer = document.getElementById('gallery-container');
             const galleryLoading = document.getElementById('gallery-loading');
             const scrollHint = document.getElementById('scroll-hint');
-            const apiUrl = `${CONFIG.galleryUrl}?json=true`;
+            const apiUrl = `${CONFIG.galleryUrl}&json=true`; // Use & instead of ? if your URL already has a key
 
             try {
-                const response = await fetch(apiUrl, { method: 'GET', redirect: 'follow', credentials: 'omit' });
+                // ADDED: mode: 'cors' and cache: 'no-cache' to help with the 302 redirects
+                const response = await fetch(apiUrl, { 
+                    method: 'GET',
+                    mode: 'cors', 
+                    cache: 'no-cache',
+                    redirect: 'follow'
+                });
+
                 if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
                 
                 const images = await response.json();
